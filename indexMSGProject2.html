@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background-color: rgb(240, 189, 255);
+        }
+        p {
+            color: black;
+            font-size: xx-large;
+            text-align: center;
+
+        }
+        button {         
+            padding: 10px 10px;
+            margin-left: 43%;
+            border: 3px solid black;           
+        }
+    </style>
+
+    <script>
+        
+        function generateRandomNumber(num) {
+            return Math.floor(Math.random() * num)  // Gets # from 0 -> num - 1
+        }
+
+        const collectiveWisdomArray = {
+            signInfo: ['fruit', 'veggies', 'nuts', 'fish'],
+            fortuneOutput: ['terrible luck', 'bad luck', 'ok luck', 'good luck', 'great luck'],
+            advice: ['go out and eat', 'not read this', 'eat more', 'trust no one']
+        }
+
+        let personalWisdomArray = [] // Store the 'wisdom' in an array
+        
+        function funx(){ //gererates message for the p tag
+        // Iterate over the object and add random things from it to personalWisdomArray
+        // which is the message output for the p tag
+             personalWisdomArray = [];
+            for(let i in collectiveWisdomArray) {  // loop over the 3 topics of the collectveWisdomArray
+                
+                let n = collectiveWisdomArray[i].length;
+                let j = generateRandomNumber(n); // get a roandom value from the particulat topic in the array
+            
+                // use the object's properties to change the message added to personalWisdomArray  
+                switch(i) { 
+                case 'signInfo':
+                    personalWisdomArray.push(`Your foodgroup is"${collectiveWisdomArray[i][j]}".`)
+                    break; // adds to the personalWisdomArray
+                case 'fortuneOutput':
+                    personalWisdomArray.push(`You are having: "${collectiveWisdomArray[i][j]}".`)
+                    break
+                case 'advice':
+                    personalWisdomArray.push(`You should: "${collectiveWisdomArray[i][j]}".`)
+                    break
+                default:
+                    personalWisdomArray.push('There is not enough info.')
+                }
+            }
+    } //close funx
+    
+        function formatWisdom(wisdom) { // this joins the personalWisdomArray to a string
+            // Add some ASCII here?
+            // Add in more symbols to the array? like emojies or what not?
+            const formatted = personalWisdomArray.join('\n')
+            // console.log(formatted)
+            return formatted;
+        }
+        
+        function formatWisdomButton() { //gets message (call funx), format msg(join)(call formatWisdon), change p tag textcontent
+            funx();
+            let myMessage = "";
+            myMessage = formatWisdom(personalWisdomArray);
+            document.getElementById('message').textContent = myMessage ;
+        }
+        
+        
+    </script>
+
+</head>
+
+<body>
+
+    <p id="message">My message here</p>
+    <button onclick="formatWisdomButton()"> this is a click button </button>
+
+
+</body>
+  </html>
