@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blue Themed Website</title>
+    <link rel="stylesheet" type="text/css" href="./homePCW_CS.css">
+
+    <script>
+        function change() {
+            let first = document.getElementById('change');
+            first.innerHTML = 'BROWN BEARS ARE AWESOME!';
+     }
+
+
+    </script>
+    <style>
+    </style>
+</head>
+<body>
+
+    <!-- Fixed Header with centered content -->
+    <header>
+        <div class="nav-inner">
+            <div class="logo">My Logo</div>
+            <nav>
+                <a href="homePCW.html">Home</a>
+                <a href="#">Courses</a>
+                <a href="#">Pricing</a>
+                <a href="#">About</a>
+                <a href="#">Blog</a>
+                <a href="homePCW_Contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="site-wrapper">
+        <main>
+            
+             
+            <section class="formsection">
+                <h1>Study with us for up-to-date skills</h1>
+
+                <form action="submission.html" method="POST">
+
+                    <h3>Subscribe to our newsletter</h3>
+
+                    <section class="firstname">
+                        <label for="firstname">Firstame: </label>
+                        <input type="text" name="firstname" id="firstname">
+                    </section>
+                    <hr>
+
+
+                    <section class="lastname">
+                        <label for="lastname">Lastname:</label>
+                        <input type="text" name="lastname" id="lastname">
+                    </section>
+                    <hr>
+                    <section class="email">
+                        <label for="email">Email:</label>
+                        <input type="text" name="email" id="email">
+                    </section>
+                    <hr>
+                    <section class="phone">
+                        <label for="phone">Phone:</label>
+                        <input type="text" name="phone" id="phone">
+                    </section>
+                    <hr>
+
+
+                    <section>
+                        <!--Add your code below-->
+                        <input type="submit" value="Submit" class="submission" onclick="change()"> 
+                    </section>
+
+                </form>
+                <p id="change">""</p>
+
+            </section>
+
+        </main>
+        
+    </div>
+
+</body>
+</html>
