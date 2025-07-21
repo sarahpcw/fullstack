@@ -1,0 +1,240 @@
+<!DOCTYPE html> 
+
+<!-- to use html5 
+https://www.html.am/reference/html-special-characters.cfm
+all about forms: https://w3schools.com/html/html_form_input_types.asp 
+-->
+
+
+<html lang="en">
+
+<head >
+    <meta charset = "utf-8">
+    <meta name="viewport" content="width=device-width", initial-scale="1.0">
+    <meta name="viewport" content="width=device-width", initial-scale="1.0">
+    <title>Standard Calculator</title>
+
+<style>
+body {
+    background-color: rgb(10, 34, 2);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+footer {
+     text-align: center;
+     color:white;
+}
+h1{
+  text-align: center;
+  color:white;
+}
+.container{
+  margin: auto;
+  width: 17%;
+  padding: 10px;
+  border: 1px solid #f2f2f2;
+  -webkit-box-shadow: 1px 1px 4px 0px rgba(176,176,176,1);
+     -moz-box-shadow: 1px 1px 4px 0px rgba(176,176,176,1);
+          box-shadow: 1px 1px 4px 0px rgba(176,176,176,1);
+  background-color: #F8F8F8;
+}
+.header{
+  background-color: #81C784;
+  padding: 10px;
+  color: #fff;
+  text-align: center;
+}
+table{
+  width: 100%;
+}
+td{
+  width: 25%;
+}
+.result{
+  font-size: 24px;
+  padding: 16px 5px;
+  font-weight: 700;
+  text-align: right;
+  width: 96%;
+  border: none;
+  background-color: #F8F8F8;
+}
+ .global, 
+ .global7, .global8, .global9, .globaldiv,
+ .global4, .global5, .global6, .globalmul,
+ .global3, .global2, .global1, .globaldiv, .globalmin,
+ .globalstop
+ {
+  padding: 15px;
+  font-weight: bold;
+  font-size: 16px;
+  border: none;
+  border-radius: 3px;
+  background-color: #F2F2F2;
+  width: 100%;
+}
+/*the global class padding reset for first-row class button*/
+.first-row{
+ padding: 7px;
+}
+.plus{
+  height: 105px;
+}
+.green{
+  background-color: #81C784;
+}
+.red{
+  background-color: #F50258
+}
+.grey{
+  background-color: #F2F2F2;
+}
+.white-text{
+  color: #fff;
+}
+</style>
+
+<script type="text/javascript">
+    
+    function square(){
+            let x = parseFloat(document.getElementById("result").value);
+            let a = Math.sqrt(x);
+            document.getElementById("result").value=a;
+    }
+    
+    function percent(){
+            let x = parseFloat(document.getElementById("result").value);
+            x *= 0.01;
+            document.getElementById("result").value=x;
+    }
+    
+    function allClear(){
+            document.getElementById('result').value=0;
+    }
+    
+    let lastClick='';
+    function input(click){
+        if ( (click=="/" || click=="*" || click=="-" || click=="+") 
+        && (lastClick=="/" || lastClick=="*" || lastClick=="-" || lastClick=="+")
+        ) {
+            
+        } else {
+            document.getElementById("result").value+=click;
+            lastClick = click;
+        }
+        
+    }
+   
+    function val1OperatorValue2(val1, op, val2){
+        let z=0;
+        let x = parseFloat(val1);
+        let y = parseFloat(val2);
+        
+        switch(op){
+                case '/': 
+                    z = x / y;
+                    break;
+                case '*': z = x * y;
+                    break;
+                case '+': z = x + y;
+                    break;
+                case '-': z = x - y;
+                    break;
+                default : break;
+               }
+        let newString = String(z);
+         
+        return newString;           
+    }
+    function eqqual(myString){
+        let strVal = document.getElementById("result").value;
+        let val1 = '';
+        let val2 = '';
+        let op='';
+        for (let i = 0 ; i < strVal.length ; i++){
+            if ( !(strVal[i]=='*') && !(strVal[i]=='/') && !(strVal[i]=='+') && !(strVal[i]=='-') ){ //number
+                if (!op){ val1=val1+strVal[i];} 
+                else    { val2=val2+strVal[i];
+                }
+            } else {
+                if ( (strVal[i]=='*') || (strVal[i]=='/') || (strVal[i]=='+') || (strVal[i]=='-')){ //operator
+                    if (op) { // had an operator before eg 1 + 2 , now i have the next + eg 1+2 +3
+                        val1 = val1OperatorValue2(val1, op, val2);
+                        val2='';
+                    }
+                    op=strVal[i];
+                     
+                 }  
+            }
+        }
+        
+        val1 = val1OperatorValue2(val1, op, val2);
+        document.getElementById("result").value=val1;
+    }
+
+    </script>
+
+
+</head>
+
+  
+<body>
+    <header></header>
+    <nav>    </nav>
+    <main>  
+ 
+<!-- start  -->
+
+  <h1>Calculator</h1>
+  <div class="container">
+        <div class="header">Calculator</div>
+        <input type="text" class="result" id="result" value=""> <!-- there the selected values and result will show-->
+        <table>
+          <tr>
+            <td><input type="button" value="&radic;" class="global first-row" onclick="square()" ></td> <!-- square root -->
+            <td><input type="button"  value="(" class="global first-row"></td>
+            <td><input type="button" value=")" class="global first-row"></td>
+            <td><input type="button" value="%" class="global first-row" onclick="percent()" ></td> <!-- / percent (*0.01) -->
+          </tr>
+          <tr>
+            <td><input type="button" value="7" class="global7" id="global7" onclick="input(7)" ></td>
+            <td><input type="button" value="8" class="global8" id="global8" onclick="input(8)"></td>
+            <td><input type="button" value="9" class="global9" id="global9" onclick="input(9)"></td>
+            
+            <td><input type="button" value="/" class="globaldiv" id="globaldiv" onclick="input('/')"></td> <!-- / divide -->
+          </tr>
+          <tr>
+            <td><input type="button" value="4" class="global4" id="global4" onclick="input(4)"></td>
+            <td><input type="button" value="5" class="global5" id="global5" onclick="input(5)"></td>
+            <td><input type="button" value="6" class="global6" id="global6" onclick="input(6)"></td>
+            <td><input type="button" value="X" class="globalmul" id="globalmul" onclick="input('*')"></td> <!-- * multiply-->
+          </tr>
+          <tr>
+            <td><input type="button" value="1" class="global1" id="global1" onclick="input(1)"></td>
+            <td><input type="button" value="2" class="global2" id="global2" onclick="input(2)"></td>
+            <td><input type="button" value="3" class="global3" id="global3" onclick="input(3)"></td>
+            <td><input type="button" value="-" class="globalmin" id="globalmin" onclick="input('-')"></td> <!-- - minus -->
+          </tr>
+          <tr>
+            <td colspan="2"> 
+                <input type="button" value="0" class="global grey" id="global0"    onclick="input(0)">     </td>
+            <td><input type="button" value="." class="globalstop"  id="globalstop" onclick="input('.')"> </td> <!-- . decimal point  -->
+            <td rowspan="2">
+                <input type="button" value="+" class="global plus"  id="globalplus" onclick="input('+')"></td> <!-- +  plus -->
+          </tr>
+          <tr>
+            <!-- delete should clear  document.getElementById("result").value=0; reset the result to 0-->
+            <td><input type="button" value="C" class="global red white-text"  id="globaldel"  onclick="allClear()"></td> <!-- del  (clear screen) -->
+            
+            <!-- equal should calc and display result in document.getElementById("result").value=??? ; -->
+            <td colspan="2"><input type="button" value="=" class="global green white-text"  id="globaleq"  onclick="eqqual('=')"></td>   <!-- =  equal -->
+          </tr>
+        </table>
+      </div>
+<!-- end  -->
+
+    </main>
+    <br><br>
+    <footer> this is a footer </footer>
+ </body>   
+</html>
